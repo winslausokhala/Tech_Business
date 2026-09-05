@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mtumba Tech — Tested. Graded. Half the price.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1220;
+    --ink-soft:#4b5875;
+    --paper:#f2f5fc;
+    --paper-dim:#e4ebfa;
+    --paper-card:#ffffff;
+    --line:#c3d0ec;
+    --line-soft:#dbe4f7;
+    --amber:#2f6fed;
+    --green:#00b3c6;
+    --rust:#7b5cfa;
+    --grade-a:#00b3c6;
+    --grade-b:#2f6fed;
+    --grade-c:#7b5cfa;
+    --radius:3px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Archivo',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .hairline{border-top:1px solid var(--line);}
+  :focus-visible{outline:2px solid var(--green);outline-offset:2px;}
+  @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .headbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 0;gap:24px;
+  }
+  .brand{display:flex;align-items:baseline;gap:8px;text-decoration:none;}
+  .brand-mark{
+    font-weight:900;font-size:1.28rem;letter-spacing:-0.02em;
+  }
+  .brand-sub{
+    font-family:'IBM Plex Mono',monospace;font-size:0.68rem;color:var(--ink-soft);
+  }
+  nav.primary{display:flex;gap:28px;font-size:0.95rem;}
+  nav.primary a{text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s;}
+  nav.primary a:hover{border-bottom-color:var(--ink);}
+  .head-actions{display:flex;align-items:center;gap:18px;}
+  .cart-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--ink);color:var(--paper);
+    border:none;padding:9px 14px;border-radius:var(--radius);
+    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;cursor:pointer;
+  }
+  .cart-count{
+    background:var(--amber);color:var(--ink);
+    border-radius:50%;width:18px;height:18px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.68rem;font-weight:700;
+  }
+  .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:var(--radius);padding:8px 10px;font-family:'IBM Plex Mono',monospace;cursor:pointer;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 56px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.25fr 0.95fr;gap:56px;align-items:center;
+  }
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--green);
+    margin:0 0 18px;
+  }
+  h1.hero-head{
+    font-size:clamp(2.4rem,4.6vw,3.9rem);
+    line-height:1.03;font-weight:800;letter-spacing:-0.015em;
+    margin:0 0 22px;max-width:14ch;
+  }
+  .hero-head em{font-style:normal;color:var(--green);}
+  .hero-sub{font-size:1.08rem;color:var(--ink-soft);max-width:46ch;margin:0 0 30px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:13px 22px;border-radius:var(--radius);
+    text-decoration:none;font-weight:600;font-size:0.95rem;cursor:pointer;border:1px solid var(--ink);
+  }
+  .btn-solid{background:var(--ink);color:var(--paper);}
+  .btn-outline{background:transparent;color:var(--ink);}
+  .btn-solid:hover{background:var(--green);border-color:var(--green);}
+  .btn-outline:hover{background:var(--paper-dim);}
+
+  .cert-card{
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;position:relative;overflow:hidden;
+  }
+  .cert-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+  .cert-device{font-weight:700;font-size:1.05rem;}
+  .cert-sku{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--ink-soft);}
+  .cert-photo{
+    background:linear-gradient(135deg,#dbe8ff,#8fb3f5);
+    border:1px solid var(--line);border-radius:2px;
+    height:150px;display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+  .cert-specs{list-style:none;margin:0 0 16px;padding:0;font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--ink-soft);}
+  .cert-specs li{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--line-soft);}
+  .cert-price{display:flex;align-items:baseline;justify-content:space-between;}
+  .cert-price .amt{font-size:1.5rem;font-weight:800;}
+  .cert-price .was{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--ink-soft);text-decoration:line-through;}
+  .stamp{
+    position:absolute;top:18px;right:18px;
+    width:76px;height:76px;border-radius:50%;
+    border:3px solid var(--grade-a);color:var(--grade-a);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-weight:700;
+    transform:rotate(9deg) scale(0.5);opacity:0;
+    animation:stamp-in .5s cubic-bezier(.2,1.4,.4,1) .35s forwards;
+  }
+  .stamp .g{font-size:1.5rem;line-height:1;}
+  .stamp .t{font-size:0.55rem;letter-spacing:.04em;}
+  @keyframes stamp-in{
+    to{transform:rotate(-8deg) scale(1);opacity:1;}
+  }
+
+  /* ---------- grade strip ---------- */
+  .grades{padding:52px 0;background:var(--paper-dim);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .section-label{
+    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--ink-soft);margin:0 0 6px;
+  }
+  .section-title{font-size:1.7rem;font-weight:800;margin:0 0 32px;letter-spacing:-0.01em;max-width:26ch;}
+  .grade-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .grade-card{
+    background:var(--paper-card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;border-top:4px solid var(--g-color);
+  }
+  .grade-card.a{--g-color:var(--grade-a);}
+  .grade-card.b{--g-color:var(--grade-b);}
+  .grade-card.c{--g-color:var(--grade-c);}
+  .grade-tag{
+    font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.95rem;color:var(--g-color);
+    margin-bottom:10px;
+  }
+  .grade-card h3{margin:0 0 8px;font-size:1.08rem;}
+  .grade-card p{margin:0;color:var(--ink-soft);font-size:0.92rem;}
+
+  /* ---------- catalog ---------- */
+  .catalog{padding:64px 0;}
+  .catalog-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:18px;margin-bottom:28px;}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;}
+  .tab{
+    font-family:'IBM Plex Mono',monospace;font-size:0.8rem;
+    padding:8px 14px;border:1px solid var(--line);border-radius:20px;
+    background:transparent;cursor:pointer;color:var(--ink-soft);
+  }
+  .tab.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .card{
+    border:1px solid var(--line);border-radius:var(--radius);background:var(--paper-card);
+    display:flex;flex-direction:column;overflow:hidden;
+  }
+  .card-photo{
+    height:130px;background:linear-gradient(135deg,#dbe8ff,#8fb3f5);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--ink-soft);
+    border-bottom:1px solid var(--line);
+  }
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .card-name{font-weight:700;font-size:0.98rem;}
+  .badge{
+    font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:700;
+    padding:3px 8px;border-radius:20px;white-space:nowrap;color:#fff;
+  }
+  .badge.a{background:var(--grade-a);}
+  .badge.b{background:var(--grade-b);color:#fff;}
+  .badge.c{background:var(--grade-c);}
+  .card-spec{font-family:'IBM Plex Mono',monospace;font-size:0.76rem;color:var(--ink-soft);}
+  .card-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px;border-top:1px dashed var(--line-soft);}
+  .card-price{font-weight:800;font-size:1.08rem;}
+  .add-btn{
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;
+    background:transparent;border:1px solid var(--ink);border-radius:var(--radius);
+    padding:7px 11px;cursor:pointer;
+  }
+  .add-btn:hover{background:var(--ink);color:var(--paper);}
+  .card.hidden{display:none;}
+
+  /* ---------- process ---------- */
+  .process{padding:64px 0;background:var(--ink);color:var(--paper);}
+  .process .section-label{color:#9aa79e;}
+  .process .section-title{color:var(--paper);}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .step{border-left:1px solid #444d47;padding-left:18px;}
+  .step-num{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:0.9rem;margin-bottom:10px;}
+  .step h4{margin:0 0 8px;font-size:1.02rem;}
+  .step p{margin:0;color:#c7cdc7;font-size:0.9rem;}
+
+  /* ---------- stats ---------- */
+  .stats{padding:44px 0;border-bottom:1px solid var(--line);}
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:left;}
+  .stat-num{font-size:2.1rem;font-weight:800;font-family:'IBM Plex Mono',monospace;color:var(--green);}
+  .stat-label{color:var(--ink-soft);font-size:0.88rem;}
+
+  /* ---------- sell cta ---------- */
+  .sell{padding:60px 0;}
+  .sell-box{
+    display:grid;grid-template-columns:1.4fr 1fr;gap:32px;align-items:center;
+    border:1px solid var(--line);border-radius:var(--radius);padding:40px;background:var(--paper-card);
+  }
+  .sell h2{margin:0 0 12px;font-size:1.6rem;max-width:20ch;}
+  .sell p{margin:0 0 20px;color:var(--ink-soft);max-width:46ch;}
+  .sell-figures{font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--ink-soft);}
+  .sell-figures li{margin-bottom:8px;}
+
+  /* ---------- footer ---------- */
+  footer{padding:52px 0 32px;border-top:1px solid var(--line);}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:36px;}
+  .foot-col h5{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--ink-soft);margin:0 0 14px;}
+  .foot-col ul{list-style:none;margin:0;padding:0;}
+  .foot-col li{margin-bottom:9px;font-size:0.92rem;}
+  .foot-col a{text-decoration:none;}
+  .foot-col a:hover{text-decoration:underline;}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;font-size:0.75rem;}
+
+  @media (max-width:920px){
+    nav.primary{display:none;}
+    .menu-toggle{display:inline-block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .grade-row{grid-template-columns:1fr;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .stats-row{grid-template-columns:repeat(2,1fr);}
+    .sell-box{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap headbar">
+    <a href="#" class="brand">
+      <span class="brand-mark">Mtumba Tech</span>
+      <span class="brand-sub mono">GRADED&nbsp;ELECTRONICS</span>
+    </a>
+    <nav class="primary">
+      <a href="#catalog">Laptops</a>
+      <a href="#catalog">Phones</a>
+      <a href="#catalog">Appliances</a>
+      <a href="#process">How grading works</a>
+      <a href="#sell">Sell yours</a>
+    </nav>
+    <div class="head-actions">
+      <button class="cart-btn" id="cartBtn">
+        CART <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="menu-toggle">MENU</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">NAIROBI · TESTED ON ARRIVAL · M-PESA ACCEPTED</p>
+      <h1 class="hero-head">Good electronics don't have to be <em>new</em>.</h1>
+      <p class="hero-sub">Every laptop, phone and appliance we sell is inspected, graded A to C, and backed by a 90-day warranty — so you know exactly what condition you're paying for.</p>
+      <div class="hero-ctas">
+        <a href="#catalog" class="btn btn-solid">Browse graded stock</a>
+        <a href="#process" class="btn btn-outline">See how grading works</a>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="stamp"><span class="g">A</span><span class="t">GRADE</span></div>
+      <div class="cert-top">
+        <div>
+          <div class="cert-device">ThinkPad T480</div>
+          <div class="cert-sku mono">SKU MT-LT-0142</div>
+        </div>
+      </div>
+      <div class="cert-photo">PRODUCT&nbsp;PHOTO</div>
+      <ul class="cert-specs">
+        <li><span>Processor</span><span>i5-8350U</span></li>
+        <li><span>Memory / Storage</span><span>16GB / 256GB SSD</span></li>
+        <li><span>Battery health</span><span>91%</span></li>
+        <li><span>Cosmetic wear</span><span>Light, screen edges</span></li>
+      </ul>
+      <div class="cert-price">
+        <span class="amt">KES 32,500</span>
+        <span class="was">KES 98,000 new</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="grades">
+  <div class="wrap">
+    <p class="section-label">THE GRADING SCALE</p>
+    <h2 class="section-title">We inspect every unit and grade it honestly, before you ever see the listing.</h2>
+    <div class="grade-row">
+      <div class="grade-card a">
+        <div class="grade-tag">GRADE A — Like new</div>
+        <h3>Minimal signs of use</h3>
+        <p>Full function, battery health above 85%, no visible scratches beyond faint hairlines. Comes with original charger where available.</p>
+      </div>
+      <div class="grade-card b">
+        <div class="grade-tag">GRADE B — Well used</div>
+        <h3>Visible wear, fully working</h3>
+        <p>Noticeable scuffs or a worn keyboard finish. All ports, screen and battery tested and working within normal range.</p>
+      </div>
+      <div class="grade-card c">
+        <div class="grade-tag">GRADE C — Budget</div>
+        <h3>Heavy wear, tested working</h3>
+        <p>Cosmetic dents, scratches or a shorter battery cycle. Priced to reflect it — still fully functional and warrantied.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="catalog" id="catalog">
+  <div class="wrap">
+    <div class="catalog-head">
+      <div>
+        <p class="section-label">CURRENT STOCK</p>
+        <h2 class="section-title" style="margin-bottom:0;">143 units in the warehouse today</h2>
+      </div>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-filter="all">All</button>
+        <button class="tab" data-filter="laptop">Laptops</button>
+        <button class="tab" data-filter="phone">Phones</button>
+        <button class="tab" data-filter="appliance">Appliances</button>
+        <button class="tab" data-filter="audio">Audio & TV</button>
+      </div>
+    </div>
+
+    <div class="grid" id="grid">
+
+      <div class="card" data-cat="laptop">
+        <div class="card-photo">LAPTOP</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">Dell Latitude 7280</span><span class="badge a">GRADE A</span></div>
+          <div class="card-spec mono">i5 · 8GB / 256GB SSD · 12.5"</div>
+          <div class="card-foot"><span class="card-price">KES 28,900</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="laptop">
+        <div class="card-photo">LAPTOP</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">HP EliteBook 840 G5</span><span class="badge b">GRADE B</span></div>
+          <div class="card-spec mono">i5 · 8GB / 512GB SSD · 14"</div>
+          <div class="card-foot"><span class="card-price">KES 26,400</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="laptop">
+        <div class="card-photo">LAPTOP</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">MacBook Air 2019</span><span class="badge a">GRADE A</span></div>
+          <div class="card-spec mono">i5 · 8GB / 128GB SSD · 13"</div>
+          <div class="card-foot"><span class="card-price">KES 49,000</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="laptop">
+        <div class="card-photo">LAPTOP</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">Lenovo ThinkPad E495</span><span class="badge c">GRADE C</span></div>
+          <div class="card-spec mono">Ryzen 5 · 8GB / 1TB HDD</div>
+          <div class="card-foot"><span class="card-price">KES 18,200</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="phone">
+        <div class="card-photo">PHONE</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">Samsung Galaxy S21</span><span class="badge a">GRADE A</span></div>
+          <div class="card-spec mono">128GB · Battery 89%</div>
+          <div class="card-foot"><span class="card-price">KES 24,000</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="phone">
+        <div class="card-photo">PHONE</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">iPhone 11</span><span class="badge b">GRADE B</span></div>
+          <div class="card-spec mono">64GB · Battery 83%</div>
+          <div class="card-foot"><span class="card-price">KES 27,500</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="appliance">
+        <div class="card-photo">FRIDGE</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">Ramtons 180L Fridge</span><span class="badge b">GRADE B</span></div>
+          <div class="card-spec mono">Single door · Tested 72hrs</div>
+          <div class="card-foot"><span class="card-price">KES 15,900</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="appliance">
+        <div class="card-photo">MICROWAVE</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">Samsung Microwave 23L</span><span class="badge a">GRADE A</span></div>
+          <div class="card-spec mono">Grill function · Tested</div>
+          <div class="card-foot"><span class="card-price">KES 6,800</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="appliance">
+        <div class="card-photo">WASHER</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">LG 7kg Washing Machine</span><span class="badge c">GRADE C</span></div>
+          <div class="card-spec mono">Top load · Minor rust, works</div>
+          <div class="card-foot"><span class="card-price">KES 21,000</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="audio">
+        <div class="card-photo">TV</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">TCL 43" Smart TV</span><span class="badge a">GRADE A</span></div>
+          <div class="card-spec mono">1080p · No dead pixels</div>
+          <div class="card-foot"><span class="card-price">KES 19,500</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="audio">
+        <div class="card-photo">SPEAKER</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">JBL Charge 4</span><span class="badge b">GRADE B</span></div>
+          <div class="card-spec mono">Battery 6hrs · Tested</div>
+          <div class="card-foot"><span class="card-price">KES 7,200</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+      <div class="card" data-cat="phone">
+        <div class="card-photo">PHONE</div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-name">Tecno Camon 19</span><span class="badge a">GRADE A</span></div>
+          <div class="card-spec mono">128GB · Battery 94%</div>
+          <div class="card-foot"><span class="card-price">KES 13,400</span><button class="add-btn">Add</button></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-row">
+    <div><div class="stat-num">6,200+</div><div class="stat-label">Devices tested since 2021</div></div>
+    <div><div class="stat-num">90</div><div class="stat-label">Days warranty on every sale</div></div>
+    <div><div class="stat-num">↓54%</div><div class="stat-label">Average saving vs. buying new</div></div>
+    <div><div class="stat-num">4.7/5</div><div class="stat-label">Rating across 1,900 reviews</div></div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <p class="section-label">FROM YOUR DOOR TO OUR SHELF</p>
+    <h2 class="section-title">What happens before a device gets a grade</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Pickup or drop-off</h4>
+        <p>Free pickup within Nairobi, or bring it to our Ngara workshop for an on-the-spot quote.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>40-point inspection</h4>
+        <p>Battery health, ports, screen, keyboard, hinges and function are each checked and logged.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Grading & pricing</h4>
+        <p>The device is assigned A, B or C and priced against current market rates for that grade.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Warranty & delivery</h4>
+        <p>Every sale ships with a 90-day warranty card and a same-week delivery slot in Nairobi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sell" id="sell">
+  <div class="wrap sell-box">
+    <div>
+      <h2>Have a laptop or appliance sitting idle?</h2>
+      <p>Get a same-day quote based on our grading scale. We pay on collection — no waiting for a buyer to show up.</p>
+      <a href="#" class="btn btn-solid">Get a free quote</a>
+    </div>
+    <ul class="sell-figures">
+      <li>→ Quotes within 2 hours, Nairobi</li>
+      <li>→ Payment on collection via M-Pesa</li>
+      <li>→ Free pickup for orders above KES 5,000</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h5>MTUMBA TECH</h5>
+        <p style="color:var(--ink-soft);font-size:0.92rem;max-width:32ch;">A Nairobi workshop that tests, grades and resells laptops, phones and home appliances.</p>
+      </div>
+      <div class="foot-col">
+        <h5>SHOP</h5>
+        <ul>
+          <li><a href="#catalog">Laptops</a></li>
+          <li><a href="#catalog">Phones</a></li>
+          <li><a href="#catalog">Appliances</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>COMPANY</h5>
+        <ul>
+          <li><a href="#process">Grading scale</a></li>
+          <li><a href="#sell">Sell your device</a></li>
+          <li><a href="#">Warranty terms</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>VISIT</h5>
+        <ul>
+          <li>Ngara, Nairobi</li>
+          <li>Mon–Sat, 9am–6pm</li>
+          <li>0700 000 000</li>
+        </ul>
+      </div>
+    </div>
+    <div class="hairline" style="margin-bottom:20px;"></div>
+    <div class="foot-bottom">
+      <span>© 2026 Mtumba Tech. Sample site for demonstration.</span>
+      <span>All prices in Kenyan Shillings</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Category filtering
+  const tabs = document.querySelectorAll('.tab');
+  const cards = document.querySelectorAll('.card');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        card.classList.toggle('hidden', filter !== 'all' && card.dataset.cat !== filter);
+      });
+    });
+  });
+
+  // Simple cart counter
+  let count = 0;
+  const cartCount = document.getElementById('cartCount');
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      count++;
+      cartCount.textContent = count;
+      btn.textContent = 'Added';
+      setTimeout(() => { btn.textContent = 'Add'; }, 900);
+    });
+  });
+</script>
+
+</body>
+</html>
